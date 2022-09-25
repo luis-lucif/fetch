@@ -61,16 +61,16 @@ function renderCarrito(){
   carrito.map(item => {
     const tr = document.createElement('tr')
     tr.classList.add('ItemCarrito')
+    let{img, title, precio, cantidad}=item;
     const Content = `
-    
     <th scope="row">1</th>
             <td class="table__productos">
-              <img src=${item.img}  alt="">
-              <h6 class="title">${item.title}</h6>
+              <img src=${img}  alt="">
+              <h6 class="title">${title}</h6>
             </td>
-            <td class="table__price"><p>${item.precio}</p></td>
+            <td class="table__price"><p>${precio}</p></td>
             <td class="table__cantidad">
-              <input type="number" min="1" value=${item.cantidad} class="input__elemento">
+              <input type="number" min="1" value=${cantidad} class="input__elemento">
               <button class="delete btn btn-danger">x</button>
             </td>
     
@@ -110,9 +110,9 @@ function removeItemCarrito(e){
   const alert = document.querySelector('.remove')
 
   setTimeout( function(){
-    alert.classList.add('remove')
+    alert.classList.add('.remove')
   }, 2000)
-    alert.classList.remove('remove')
+    alert.classList.remove('.remove')
 
   tr.remove()
   CarritoTotal()
@@ -158,16 +158,22 @@ const expresiones = {
   telefono: /^\d{7,14}$/, 
 };
 
-const usuarios = [{
-  usuaio: "luis123",
+const usuarios = {
+  usuario: "luis123",
   nombre: "luis",
   password: "abc123",
   correo: "correo@gmail.com",
   telefono: "1152367587",
   
 }
-]
-console.log(usuarios)
+
+const desectructurar=({usuario, nombre, password, correo, telefono})=>{
+  console.log(usuario, nombre, password, correo, telefono)
+}
+
+desectructurar(usuarios)
+
+
  
 
 
@@ -257,11 +263,13 @@ const validarCampo = (expresion, input, campo) => {
       .classList.add("formulario__input-error-activo");
     campos[campo] = false;
   }
+  
 };
 
 const validarpassword2 = () => {
   const inputPassword1 = document.getElementById("password");
   const inputPassword2 = document.getElementById("password2");
+  
 
   if (inputPassword1.value !== inputPassword2.value) {
     document
@@ -309,7 +317,7 @@ formulario.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const terminos = document.getElementById("terminos");
-  if (
+  /*if (
     campos.usuario &&
     campos.nombre &&
     campos.password &&
@@ -317,7 +325,9 @@ formulario.addEventListener("submit", (e) => {
     campos.telefono &&
     terminos.checked
   ) {
-    formulario.reset();
+    formulario.reset();*/
+    
+    campos.usuario&&campos.nombre&&campos,password&&campos.correo&&campos.telefono&&terminos.checked ? formulario.reset() : document.getElementById("formulario__mensaje").classList.add("formulario__mensaje-activo");
 
     document
       .getElementById("formulario__mensaje-exito")
@@ -332,13 +342,16 @@ formulario.addEventListener("submit", (e) => {
       .querySelectorAll(".formulario__grupo-correcto")
       .forEach((icono) => {
         icono.classList.remove("formulario__grupo-correcto");
-      });
-  } else {
+      })
+  }) /*else {
     document
       .getElementById("formulario__mensaje")
       .classList.add("formulario__mensaje-activo");
   }
-});
+});*/
+
+
+
 
 
 function cargarUsuario(arr,obj){
@@ -351,4 +364,4 @@ formulario__btn.addEventListener("click", () =>{
   const nuevoUsuario= new registro(usuario.value, nombre.value, password.value, correo.value, telefono.value, )
   console.log(nuevoUsuario)
    //cargarUsuario(inventarioUsr,)
-})
+}) 
