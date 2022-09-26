@@ -31,13 +31,28 @@ function addToCarritoItem(e){
 
 
 function addItemCarrito(newItem){
-
-  const alert = document.querySelector('.alert')
+  Toastify({
+    text: "Producto agregado al carrito",
+    duration: 3000,
+    destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "center", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)",
+      color:"black",
+      fontWeight: "bold",
+    },
+    onClick: function(){} // Callback after click
+  }).showToast();
+  /*const alert = document.querySelector('.alert')
 
   setTimeout( function(){
     alert.classList.add('hide')
   }, 2000)
-    alert.classList.remove('hide')
+    alert.classList.remove('hide')*/
 
   const InputElemnto = tbody.getElementsByClassName('input__elemento')
   for(let i =0; i < carrito.length ; i++){
@@ -106,13 +121,28 @@ function removeItemCarrito(e){
       carrito.splice(i, 1)
     }
   }
-
-  const alert = document.querySelector('.remove')
+  Toastify({
+    text: "Producto Eliminado",
+    duration: 3000,
+    destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "center", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(160deg, #ff2600 0%, #ff7b00 100%)",
+      color:"black",
+      fontWeight: "bold",
+    },
+    onClick: function(){} // Callback after click
+  }).showToast();
+  /*const alert = document.querySelector('.remove')
 
   setTimeout( function(){
     alert.classList.add('.remove')
   }, 2000)
-    alert.classList.remove('.remove')
+    alert.classList.remove('.remove')*/
 
   tr.remove()
   CarritoTotal()
