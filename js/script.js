@@ -174,6 +174,87 @@ window.onload = function(){
 }
 
 
+
+//opiniones
+
+
+
+
+
+
+contenedor = document.querySelector(".contenedor");
+
+
+
+
+const opiniones = [
+  /*{ id: 1, nombre: "Johana", opinion: "buenos productos!", img: "ng-4200x.jpg" },
+  { id: 2, nombre: "Lautaro", opinion: "siempre ofertas", img: "ng-4200x.jpg" },
+  { id: 3, nombre: "Cristian", opinion: "no me llego el producto a tiempo", img: "ng-5000x.jpg" },
+  { id: 4, nombre: "Luciano", opinion: "sigo esperando", img: "st-220.jpg" },
+  { id: 5, nombre: "Silvia", opinion: "buena atencion", img: "st-808.jpg" },
+  { id: 6, nombre: "Andres", opinion: "productos de calidad", img: "revoker.jpg" },  */
+ ];   
+    
+    
+
+
+const pedirOpiniones= ()=>{
+  return new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      resolve(opiniones)
+    },)
+  })
+} 
+
+const renderOpiniones = (arr) => {
+  // función que genere la vista de los productos
+  let html;
+  for (const item of arr) {
+    const {  nombre, img, opinion } = item;
+
+    html = `
+        <div class="card">
+      <div class="card-image">
+        <img src="../img/${img}">
+        <span class="card-title">${nombre.toUpperCase()}</span>
+      </div>
+      <div class="card-content">
+        
+      <p>${opinion}</p>
+      
+      </div>
+      <div class="card-action">
+        
+      </div>
+      </div>
+     `;
+    
+    contenedor.innerHTML += html;
+  }
+};
+
+pedirOpiniones()
+.then(respuesta=>{
+  contenedor.textContent="";
+  
+  renderOpiniones(opiniones)
+})
+
+
+const respuesta = async ()=>{
+  const response = await fetch("./js/data.json");
+
+  const data= await response.json();
+  renderOpiniones(data)
+
+}
+
+respuesta()
+
+
+
+
 //formulario//
 
 const formulario = document.getElementById("formulario");
@@ -395,3 +476,4 @@ formulario__btn.addEventListener("click", () =>{
   console.log(nuevoUsuario)
    //cargarUsuario(inventarioUsr,)
 }) 
+
